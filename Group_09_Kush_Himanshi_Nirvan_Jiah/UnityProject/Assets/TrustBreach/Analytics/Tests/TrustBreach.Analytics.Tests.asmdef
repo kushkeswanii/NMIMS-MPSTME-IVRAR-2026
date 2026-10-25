@@ -1,0 +1,29 @@
+{
+    "name": "TrustBreach.Analytics.Tests",
+    "rootNamespace": "TrustBreach.Analytics.Tests",
+    "references": [
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner",
+        "TrustBreach.Core",
+        "TrustBreach.Analytics",
+        "TrustBreach.Analytics.Dashboard",
+        "TrustBreach.Dialogue",
+        "TrustBreach.AI",
+        "TrustBreach.Editor"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

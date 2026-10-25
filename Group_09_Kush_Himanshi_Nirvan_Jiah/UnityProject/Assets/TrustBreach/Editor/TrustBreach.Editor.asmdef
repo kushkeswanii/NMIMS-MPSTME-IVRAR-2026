@@ -1,0 +1,30 @@
+{
+    "name": "TrustBreach.Editor",
+    "rootNamespace": "TrustBreach.Editor",
+    "references": [
+        "TrustBreach.Core",
+        "TrustBreach.Interactions",
+        "Oculus.VR",
+        "Oculus.VR.Editor",
+        "Oculus.Interaction",
+        "Oculus.Interaction.Editor",
+        "Oculus.Interaction.OVR",
+        "Oculus.Interaction.OVR.Editor",
+        "Unity.RenderPipelines.Universal.Runtime",
+        "Unity.TextMeshPro",
+        "TrustBreach.Dialogue",
+        "TrustBreach.AI",
+        "TrustBreach.Telemetry"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

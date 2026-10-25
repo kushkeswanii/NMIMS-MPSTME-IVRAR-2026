@@ -1,0 +1,20 @@
+{
+    "name": "TrustBreach.Dialogue",
+    "rootNamespace": "TrustBreach.Dialogue",
+    "references": [
+        "TrustBreach.Core",
+        "TrustBreach.AI",
+        "TrustBreach.Interactions",
+        "Oculus.Interaction",
+        "Unity.TextMeshPro"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

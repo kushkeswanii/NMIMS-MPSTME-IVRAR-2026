@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c82aeb788e4a4826bfc11fa3a2b54fe, type: 3}
+  m_Name: LLMProviderSettings
+  m_EditorClassIdentifier: TrustBreach.AI::TrustBreach.AI.LLMProviderSettings
+  _enabled: 0
+  _apiKeyEnvironmentVariable: TRUSTBREACH_LLM_API_KEY
+  _model: 
+  _timeoutSeconds: 2.5
+  _maxCharacters: 280

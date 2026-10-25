@@ -1,0 +1,17 @@
+{
+    "name": "TrustBreach.Interactions",
+    "rootNamespace": "TrustBreach.Interactions",
+    "references": [
+        "TrustBreach.Core",
+        "Oculus.Interaction"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

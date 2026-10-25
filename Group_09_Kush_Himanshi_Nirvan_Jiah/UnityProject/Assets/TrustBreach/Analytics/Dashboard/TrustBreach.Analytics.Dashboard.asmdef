@@ -1,0 +1,21 @@
+{
+    "name": "TrustBreach.Analytics.Dashboard",
+    "rootNamespace": "TrustBreach.Analytics.Dashboard",
+    "references": [
+        "TrustBreach.Core",
+        "TrustBreach.Analytics",
+        "UnityEngine.UI",
+        "Unity.TextMeshPro",
+        "Unity.InputSystem",
+        "Unity.XR.Management"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

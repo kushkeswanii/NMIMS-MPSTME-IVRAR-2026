@@ -1,0 +1,16 @@
+{
+    "name": "TrustBreach.Telemetry",
+    "rootNamespace": "TrustBreach.Telemetry",
+    "references": [
+        "TrustBreach.Core"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

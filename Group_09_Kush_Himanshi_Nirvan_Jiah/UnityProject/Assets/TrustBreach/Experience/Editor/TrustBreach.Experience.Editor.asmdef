@@ -1,0 +1,27 @@
+{
+    "name": "TrustBreach.Experience.Editor",
+    "rootNamespace": "TrustBreach.Experience.Editor",
+    "references": [
+        "TrustBreach.Core",
+        "TrustBreach.Interactions",
+        "TrustBreach.Dialogue",
+        "TrustBreach.Experience",
+        "TrustBreach.Editor",
+        "TrustBreach.Analytics",
+        "TrustBreach.Analytics.Editor",
+        "Oculus.Interaction",
+        "Unity.TextMeshPro",
+        "Oculus.VR"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

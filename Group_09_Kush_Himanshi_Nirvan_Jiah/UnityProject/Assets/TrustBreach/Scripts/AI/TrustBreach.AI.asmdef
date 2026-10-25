@@ -1,0 +1,16 @@
+{
+    "name": "TrustBreach.AI",
+    "rootNamespace": "TrustBreach.AI",
+    "references": [
+        "TrustBreach.Core"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

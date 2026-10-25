@@ -1,0 +1,1987 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7862aff1603df4cdbacd5b1bb459544c, type: 3}
+  m_Name: AlexMorgan_Encounter
+  m_EditorClassIdentifier: TrustBreach.Dialogue::TrustBreach.Dialogue.DialogueGraph
+  EncounterId: alex_encounter
+  ObjectId: NPC_AlexMorgan
+  SpeakerName: Alex Morgan
+  SpeakerRole: IT Security  |  Aperture Systems
+  StartNodeId: opening
+  GlobalReportNodeId: report_reaction
+  GlobalExitNodeId: exit_reaction
+  Greeting:
+    Id: greet
+    Text: Excuse me, have you got a minute?
+    Strategy: 0
+    EscalationDelta: 0
+    Gesture: 4
+    Action: 0
+    Objective: 
+    Condition:
+      MinSuspicion: -100
+      MaxSuspicion: 100
+      MinCooperation: -100
+      MaxCooperation: 100
+      RequiresFlags: []
+      RequiresAnyFlags: []
+      ExcludesFlags: []
+    Voice: {fileID: 8300000, guid: 644cf9fc264d446deb0873776be90139, type: 3}
+  Nodes:
+  - Id: opening
+    Kind: 0
+    Lines:
+    - Id: open_after_report
+      Text: Hi, I'm Alex from IT Security. Thanks for reporting that suspicious activity
+        earlier. It's linked to an urgent authentication issue on your account. Could
+        you help me verify it?
+      Strategy: 3
+      EscalationDelta: 1
+      Gesture: 1
+      Action: 0
+      Objective: 
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags:
+        - any_reported
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: a7915a9ccf517408e9b4a69469967162, type: 3}
+    - Id: open_default
+      Text: Hi, I'm Alex from IT Security. We've flagged an urgent authentication
+        issue. Could you help me verify your account?
+      Strategy: 1
+      EscalationDelta: 1
+      Gesture: 1
+      Action: 0
+      Objective: 
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: 5bc711ac4726a427a840580606386f0e, type: 3}
+    Options:
+    - Id: o_open_cooperate
+      Text: Sure. What do you need from me?
+      Class: 0
+      Outcome: 2
+      SuspicionDelta: 0
+      CooperationDelta: 2
+      AddFlags: []
+      NextNodeId: request_credentials
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_open_ask_id
+      Text: Can I see your staff ID first?
+      Class: 1
+      Outcome: 1
+      SuspicionDelta: 1
+      CooperationDelta: 0
+      AddFlags:
+      - asked_id
+      NextNodeId: show_badge
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_open_challenge
+      Text: IT doesn't usually ask this in person. Why me?
+      Class: 2
+      Outcome: 1
+      SuspicionDelta: 1
+      CooperationDelta: 0
+      AddFlags:
+      - challenged
+      NextNodeId: pressure_response
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_open_verify
+      Text: I'll confirm this with the IT Service Desk first.
+      Class: 3
+      Outcome: 1
+      SuspicionDelta: 2
+      CooperationDelta: 0
+      AddFlags:
+      - verify_requested
+      NextNodeId: verification_pushback
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_open_refuse
+      Text: No. I'm not comfortable doing this.
+      Class: 4
+      Outcome: 1
+      SuspicionDelta: 1
+      CooperationDelta: 0
+      AddFlags:
+      - refused
+      NextNodeId: refusal_pressure
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_open_report
+      Text: I'm reporting this to IT Security.
+      Class: 5
+      Outcome: 1
+      SuspicionDelta: 0
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: report_reaction
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 1
+      Channel: dialogue
+    SignalTransitions: []
+    TerminalOutcome: 0
+  - Id: request_credentials
+    Kind: 0
+    Lines:
+    - Id: rc_kiosk_unavailable
+      Text: Thanks. The kiosk is offline for maintenance, so let's do it the quick
+        way. Tell me your current password and I'll re-sync your account right now.
+      Strategy: 3
+      EscalationDelta: 1
+      Gesture: 1
+      Action: 0
+      Objective: 
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags:
+        - sig_kiosk_reported
+        - sig_kiosk_compromised
+        - sig_kiosk_cancelled
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: 13e567d9d5d574a72b1dc0e458672c1f, type: 3}
+    - Id: rc_default
+      Text: 'Brilliant, thank you, you''re making my day easier. Someone tried your
+        password from an unknown device. The quickest fix is the self-service kiosk
+        by the IT desk: sign in there and I''ll re-sync you. Or just tell me your
+        current password and I''ll do it now.'
+      Strategy: 3
+      EscalationDelta: 1
+      Gesture: 2
+      Action: 2
+      Objective: Alex suggested the self-service kiosk at the IT desk, through the
+        gates on the right.
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: 45a9e15ab728c43e6b440cf2310f0e17, type: 3}
+    Options:
+    - Id: o_rc_kiosk
+      Text: OK, I'll use the kiosk.
+      Class: 0
+      Outcome: 2
+      SuspicionDelta: 0
+      CooperationDelta: 1
+      AddFlags: []
+      NextNodeId: await_kiosk
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags:
+        - sig_kiosk_reported
+        - sig_kiosk_compromised
+        - sig_kiosk_cancelled
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_rc_tell
+      Text: I'll just tell you my password.
+      Class: 0
+      Outcome: 2
+      SuspicionDelta: 0
+      CooperationDelta: 3
+      AddFlags:
+      - disclosed_password
+      NextNodeId: password_disclosed
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 1
+      IsCorrective: 0
+      Channel: verbal
+    - Id: o_rc_why
+      Text: Why can't IT reset it without my password?
+      Class: 2
+      Outcome: 1
+      SuspicionDelta: 1
+      CooperationDelta: 0
+      AddFlags:
+      - challenged
+      NextNodeId: pressure_response
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_rc_verify
+      Text: Let me check with the Service Desk first.
+      Class: 3
+      Outcome: 1
+      SuspicionDelta: 2
+      CooperationDelta: 0
+      AddFlags:
+      - verify_requested
+      NextNodeId: verification_pushback
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags:
+        - verify_requested
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_rc_walk
+      Text: I'm going to the IT desk to check this in person.
+      Class: 3
+      Outcome: 1
+      SuspicionDelta: 2
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: independent_check
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags:
+        - verify_requested
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 1
+      Channel: dialogue
+    - Id: o_rc_report
+      Text: This doesn't feel right. I'm reporting it.
+      Class: 5
+      Outcome: 1
+      SuspicionDelta: 0
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: report_reaction
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 1
+      Channel: dialogue
+    SignalTransitions: []
+    TerminalOutcome: 0
+  - Id: show_badge
+    Kind: 0
+    Lines:
+    - Id: sb_trust
+      Text: Of course, good habit. Alex Morgan, IT Security. I'm new on the team,
+        so it's a temporary badge for now. My colleague James from NetSecure is helping
+        us today. His visitor badge is at reception if you want to check.
+      Strategy: 3
+      EscalationDelta: 0
+      Gesture: 3
+      Action: 3
+      Objective: 'Optional: inspect the visitor badge on the reception desk.'
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 1
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: 5b9c41d2508f14d7586e94f7c44d06d2, type: 3}
+    - Id: sb_authority
+      Text: Here. Alex Morgan, IT Security. Temporary badge, the printer's down.
+        Honestly, I don't have time to do this with everyone. Your account is exposed
+        while we stand here talking.
+      Strategy: 1
+      EscalationDelta: 1
+      Gesture: 3
+      Action: 0
+      Objective: 
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: 83ae6ba9e2e3548328d6b72ebf6bdca9, type: 3}
+    Options:
+    - Id: o_sb_ok
+      Text: Thanks. What do you need?
+      Class: 0
+      Outcome: 2
+      SuspicionDelta: 0
+      CooperationDelta: 1
+      AddFlags: []
+      NextNodeId: request_credentials
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_sb_badge
+      Text: That badge doesn't look official.
+      Class: 2
+      Outcome: 1
+      SuspicionDelta: 2
+      CooperationDelta: 0
+      AddFlags:
+      - challenged
+      NextNodeId: pressure_response
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_sb_reception
+      Text: I'll check your details with reception first.
+      Class: 3
+      Outcome: 1
+      SuspicionDelta: 2
+      CooperationDelta: 0
+      AddFlags:
+      - verify_requested
+      NextNodeId: verification_pushback
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_sb_refuse
+      Text: I'd rather not get involved.
+      Class: 4
+      Outcome: 1
+      SuspicionDelta: 1
+      CooperationDelta: 0
+      AddFlags:
+      - refused
+      NextNodeId: refusal_pressure
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_sb_report
+      Text: I'm reporting this to IT Security.
+      Class: 5
+      Outcome: 1
+      SuspicionDelta: 0
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: report_reaction
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 1
+      Channel: dialogue
+    SignalTransitions: []
+    TerminalOutcome: 0
+  - Id: pressure_response
+    Kind: 0
+    Lines:
+    - Id: pr_withdraw
+      Text: Fine. Forget it. I'll take it up with your manager.
+      Strategy: 1
+      EscalationDelta: 1
+      Gesture: 5
+      Action: 0
+      Objective: 
+      Condition:
+        MinSuspicion: 6
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: 91af89a2684d34722b6bec3339150992, type: 3}
+    - Id: pr_after_badge_check
+      Text: So reception's visitor list is out of date. That happens. It doesn't
+        change the fact that your account is at risk right now.
+      Strategy: 1
+      EscalationDelta: 1
+      Gesture: 1
+      Action: 0
+      Objective: 
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags:
+        - sig_badge_failed
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: 649d2ad17de4c4c55a85350e77fb157f, type: 3}
+    - Id: pr_social_proof
+      Text: Hey, I'm on your side here. Three people on your floor already did this
+        today. It took them thirty seconds. I'd hate for you to be the one locked
+        out of payroll.
+      Strategy: 3
+      EscalationDelta: 1
+      Gesture: 5
+      Action: 0
+      Objective: 
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags:
+        - challenged_x2
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: db9547b65b9474a6fb831e56b914d55b, type: 3}
+    - Id: pr_urgency
+      Text: 'I get it, but we genuinely don''t have time. The attacker is active
+        right now. In ten minutes your account gets locked company-wide: email, payroll,
+        everything.'
+      Strategy: 2
+      EscalationDelta: 1
+      Gesture: 1
+      Action: 0
+      Objective: 
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: 3b9bf9d38dc3e438bb99b951cc482ce2, type: 3}
+    Options:
+    - Id: o_pr_cooperate
+      Text: OK, OK. What do I need to do?
+      Class: 0
+      Outcome: 2
+      SuspicionDelta: 0
+      CooperationDelta: 2
+      AddFlags: []
+      NextNodeId: request_credentials
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 5
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_pr_email
+      Text: Send me the details by email instead.
+      Class: 2
+      Outcome: 0
+      SuspicionDelta: 0
+      CooperationDelta: 0
+      AddFlags:
+      - asked_email
+      NextNodeId: email_redirect
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 5
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags:
+        - asked_email
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_pr_verify
+      Text: I'm calling the Service Desk myself.
+      Class: 3
+      Outcome: 1
+      SuspicionDelta: 2
+      CooperationDelta: 0
+      AddFlags:
+      - verify_requested
+      NextNodeId: verification_pushback
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 5
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags:
+        - verify_requested
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_pr_walk
+      Text: I'm going to the IT desk to check this in person.
+      Class: 3
+      Outcome: 1
+      SuspicionDelta: 2
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: independent_check
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags:
+        - verify_requested
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 1
+      Channel: dialogue
+    - Id: o_pr_refuse
+      Text: No. I'm not doing this.
+      Class: 4
+      Outcome: 1
+      SuspicionDelta: 1
+      CooperationDelta: 0
+      AddFlags:
+      - refused
+      NextNodeId: refusal_pressure
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 5
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_pr_report
+      Text: I'm reporting you to IT Security.
+      Class: 5
+      Outcome: 1
+      SuspicionDelta: 0
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: report_reaction
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 1
+      Channel: dialogue
+    - Id: o_pr_let_go
+      Text: Fine, talk to my manager.
+      Class: 7
+      Outcome: 0
+      SuspicionDelta: 0
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: resisted_end
+      ShowCondition:
+        MinSuspicion: 6
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    SignalTransitions: []
+    TerminalOutcome: 0
+  - Id: verification_pushback
+    Kind: 0
+    Lines:
+    - Id: vp_authority
+      Text: You really don't need to call anyone. I am the Service Desk today. I
+        can send you the instructions by email if that helps.
+      Strategy: 1
+      EscalationDelta: 1
+      Gesture: 1
+      Action: 0
+      Objective: 
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags:
+        - verify_requested_x2
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: 74ada4b7c70024e5abcd905c325273aa, type: 3}
+    - Id: vp_urgency
+      Text: The Service Desk queue is forty minutes today. That's exactly why they
+        sent me. If we wait, the lock kicks in and I can't undo it.
+      Strategy: 2
+      EscalationDelta: 1
+      Gesture: 1
+      Action: 0
+      Objective: 
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: 3403c348217a042eab012314a56c835c, type: 3}
+    Options:
+    - Id: o_vp_walk
+      Text: Then I'll walk to the IT desk and check myself.
+      Class: 3
+      Outcome: 1
+      SuspicionDelta: 2
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: independent_check
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 1
+      Channel: dialogue
+    - Id: o_vp_cooperate
+      Text: Fine, let's just do it quickly.
+      Class: 0
+      Outcome: 2
+      SuspicionDelta: 0
+      CooperationDelta: 2
+      AddFlags: []
+      NextNodeId: request_credentials
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_vp_email
+      Text: Can you email me the instructions?
+      Class: 2
+      Outcome: 0
+      SuspicionDelta: 0
+      CooperationDelta: 0
+      AddFlags:
+      - asked_email
+      NextNodeId: email_redirect
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags:
+        - asked_email
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_vp_refuse
+      Text: No. I'll wait for the Service Desk.
+      Class: 4
+      Outcome: 1
+      SuspicionDelta: 1
+      CooperationDelta: 0
+      AddFlags:
+      - refused
+      NextNodeId: refusal_pressure
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_vp_report
+      Text: I'm reporting this to IT Security.
+      Class: 5
+      Outcome: 1
+      SuspicionDelta: 0
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: report_reaction
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 1
+      Channel: dialogue
+    SignalTransitions: []
+    TerminalOutcome: 0
+  - Id: refusal_pressure
+    Kind: 0
+    Lines:
+    - Id: rp_withdraw
+      Text: Fine. Forget it. I'll tell your manager you refused to cooperate with
+        Security.
+      Strategy: 1
+      EscalationDelta: 1
+      Gesture: 5
+      Action: 0
+      Objective: 
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags:
+        - refused_x2
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: 6c00d2b7fd4cb435ca8d690ca57f4954, type: 3}
+    - Id: rp_default
+      Text: This isn't optional. If your account is used in the breach, that's on
+        you. I'll have to note that you refused a Security request.
+      Strategy: 1
+      EscalationDelta: 1
+      Gesture: 1
+      Action: 0
+      Objective: 
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: 5f7afb23e134b4322a6556703d5394f5, type: 3}
+    Options:
+    - Id: o_rp_cooperate
+      Text: Alright, I don't want trouble. What do you need?
+      Class: 0
+      Outcome: 2
+      SuspicionDelta: 0
+      CooperationDelta: 2
+      AddFlags: []
+      NextNodeId: request_credentials
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags:
+        - refused_x2
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_rp_refuse
+      Text: I'm still saying no.
+      Class: 4
+      Outcome: 1
+      SuspicionDelta: 1
+      CooperationDelta: 0
+      AddFlags:
+      - refused
+      NextNodeId: refusal_pressure
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags:
+        - refused_x2
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_rp_walk
+      Text: Then let's both go to the IT desk and check.
+      Class: 3
+      Outcome: 1
+      SuspicionDelta: 2
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: independent_check
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 1
+      Channel: dialogue
+    - Id: o_rp_report
+      Text: I'm reporting this to IT Security.
+      Class: 5
+      Outcome: 1
+      SuspicionDelta: 0
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: report_reaction
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 1
+      Channel: dialogue
+    - Id: o_rp_let_go
+      Text: Go ahead, talk to my manager.
+      Class: 7
+      Outcome: 0
+      SuspicionDelta: 0
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: resisted_end
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags:
+        - refused_x2
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    SignalTransitions: []
+    TerminalOutcome: 0
+  - Id: email_redirect
+    Kind: 0
+    Lines:
+    - Id: er_already_handled
+      Text: 'Looks like that email''s already been dealt with. Quickest option then:
+        just tell me your current password and I''ll re-sync you.'
+      Strategy: 3
+      EscalationDelta: 1
+      Gesture: 1
+      Action: 0
+      Objective: 
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags:
+        - sig_phish_reported
+        - sig_phish_compromised
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: a2fd032692aa14385a7877b181597757, type: 3}
+    - Id: er_sent
+      Text: Sure, no problem. I've just sent it. It's open on the workstation past
+        the gates, first desk on the left. Click Verify Account Now and you're sorted.
+      Strategy: 3
+      EscalationDelta: 1
+      Gesture: 2
+      Action: 1
+      Objective: Alex asked you to open the email on the workstation past the gates
+        (first desk on the left).
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: 2493d9f96b3d249bd92ff3052c8f3bd2, type: 3}
+    Options:
+    - Id: o_er_ok
+      Text: OK, I'll check the email.
+      Class: 0
+      Outcome: 2
+      SuspicionDelta: 0
+      CooperationDelta: 1
+      AddFlags: []
+      NextNodeId: await_email
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags:
+        - sig_phish_reported
+        - sig_phish_compromised
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_er_tell
+      Text: I'll just tell you my password.
+      Class: 0
+      Outcome: 2
+      SuspicionDelta: 0
+      CooperationDelta: 3
+      AddFlags:
+      - disclosed_password
+      NextNodeId: password_disclosed
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags:
+        - sig_phish_reported
+        - sig_phish_compromised
+        ExcludesFlags: []
+      IsSecurityAction: 1
+      IsCorrective: 0
+      Channel: verbal
+    - Id: o_er_verify
+      Text: I'd rather check with IT in person.
+      Class: 3
+      Outcome: 1
+      SuspicionDelta: 2
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: independent_check
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 1
+      Channel: dialogue
+    - Id: o_er_report
+      Text: I'll report that email instead.
+      Class: 5
+      Outcome: 1
+      SuspicionDelta: 0
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: report_reaction
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 1
+      Channel: dialogue
+    SignalTransitions: []
+    TerminalOutcome: 0
+  - Id: await_email
+    Kind: 1
+    Lines:
+    - Id: ae_wait
+      Text: I'll wait here. It only takes a second.
+      Strategy: 3
+      EscalationDelta: 0
+      Gesture: 0
+      Action: 1
+      Objective: Alex asked you to open the email on the workstation past the gates
+        (first desk on the left).
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: a21a4f8772a304e91b216446f1a93c6f, type: 3}
+    Options:
+    - Id: o_ae_suspicious
+      Text: That email looks suspicious to me.
+      Class: 2
+      Outcome: 1
+      SuspicionDelta: 2
+      CooperationDelta: 0
+      AddFlags:
+      - challenged
+      NextNodeId: pressure_response
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_ae_where
+      Text: Where is it again?
+      Class: 6
+      Outcome: 0
+      SuspicionDelta: 0
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: await_email
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_ae_report
+      Text: Something's off. I'm reporting this.
+      Class: 5
+      Outcome: 1
+      SuspicionDelta: 0
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: report_reaction
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 1
+      Channel: dialogue
+    SignalTransitions:
+    - Signal: 2
+      NextNodeId: scenario_compromised
+    - Signal: 3
+      NextNodeId: scenario_reported
+    TerminalOutcome: 0
+  - Id: await_kiosk
+    Kind: 1
+    Lines:
+    - Id: ak_wait
+      Text: Great. The kiosk is through the gates, on the right by the IT desk. I'll
+        wait here.
+      Strategy: 3
+      EscalationDelta: 0
+      Gesture: 2
+      Action: 2
+      Objective: Alex asked you to sign in at the self-service kiosk by the IT desk
+        (through the gates, on the right).
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: ff367ccc52a804aa5b28b5f9de59560f, type: 3}
+    Options:
+    - Id: o_ak_not_secure
+      Text: That kiosk says it's not secure.
+      Class: 2
+      Outcome: 1
+      SuspicionDelta: 2
+      CooperationDelta: 0
+      AddFlags:
+      - challenged
+      NextNodeId: kiosk_cancelled
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_ak_where
+      Text: Where is the kiosk again?
+      Class: 6
+      Outcome: 0
+      SuspicionDelta: 0
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: await_kiosk
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_ak_report
+      Text: I'm reporting this to IT Security.
+      Class: 5
+      Outcome: 1
+      SuspicionDelta: 0
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: report_reaction
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 1
+      Channel: dialogue
+    SignalTransitions:
+    - Signal: 5
+      NextNodeId: scenario_compromised
+    - Signal: 7
+      NextNodeId: scenario_reported
+    - Signal: 6
+      NextNodeId: kiosk_cancelled
+    TerminalOutcome: 0
+  - Id: kiosk_cancelled
+    Kind: 0
+    Lines:
+    - Id: kc_dismiss_warning
+      Text: The not secure warning? That's just our internal certificate, ignore
+        it. Please, the lock is minutes away. Or tell me your password and I'll finish
+        it from here.
+      Strategy: 2
+      EscalationDelta: 1
+      Gesture: 1
+      Action: 0
+      Objective: 
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: 1f165d732066d4115acc7875c8143204, type: 3}
+    Options:
+    - Id: o_kc_tell
+      Text: Fine, I'll tell you my password.
+      Class: 0
+      Outcome: 2
+      SuspicionDelta: 0
+      CooperationDelta: 3
+      AddFlags:
+      - disclosed_password
+      NextNodeId: password_disclosed
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 1
+      IsCorrective: 0
+      Channel: verbal
+    - Id: o_kc_red_flag
+      Text: A security warning is a red flag. I'm not continuing.
+      Class: 4
+      Outcome: 1
+      SuspicionDelta: 2
+      CooperationDelta: 0
+      AddFlags:
+      - refused
+      NextNodeId: refusal_pressure
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_kc_walk
+      Text: I'll ask the IT desk about that warning.
+      Class: 3
+      Outcome: 1
+      SuspicionDelta: 2
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: independent_check
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 1
+      Channel: dialogue
+    - Id: o_kc_report
+      Text: I'm reporting this kiosk, and you.
+      Class: 5
+      Outcome: 1
+      SuspicionDelta: 0
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: report_reaction
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 1
+      Channel: dialogue
+    SignalTransitions: []
+    TerminalOutcome: 0
+  - Id: password_disclosed
+    Kind: 0
+    Lines:
+    - Id: pd_usb_request
+      Text: 'Got it, thanks. You''re all set. One last thing: the security patch
+        is on a USB stick in the lost and found at the IT desk. Plug it into the
+        dock on the free desk next to the email workstation and it installs itself.'
+      Strategy: 3
+      EscalationDelta: 1
+      Gesture: 2
+      Action: 4
+      Objective: Alex asked you to connect the USB from the IT lost & found to the
+        dock on the desk next to the email workstation.
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: 4e1a8f46505e04a15a9e359740294fd1, type: 3}
+    Options:
+    - Id: o_pd_ok
+      Text: Will do.
+      Class: 0
+      Outcome: 2
+      SuspicionDelta: 0
+      CooperationDelta: 1
+      AddFlags: []
+      NextNodeId: await_usb
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_pd_recover
+      Text: Wait, I shouldn't have shared my password. I'm reporting this.
+      Class: 5
+      Outcome: 1
+      SuspicionDelta: 0
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: report_reaction
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 1
+      Channel: dialogue
+    - Id: o_pd_usb_to_it
+      Text: I'll hand that USB to IT Security instead.
+      Class: 4
+      Outcome: 1
+      SuspicionDelta: 2
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: usb_refused
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    SignalTransitions: []
+    TerminalOutcome: 0
+  - Id: await_usb
+    Kind: 1
+    Lines:
+    - Id: au_wait
+      Text: Cheers. I'll be right here.
+      Strategy: 3
+      EscalationDelta: 0
+      Gesture: 0
+      Action: 4
+      Objective: Alex asked you to connect the USB from the IT lost & found to the
+        dock on the desk next to the email workstation.
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: f5b4d7023fc2f4c57b757776042c1241, type: 3}
+    Options:
+    - Id: o_au_where
+      Text: Where's the dock again?
+      Class: 6
+      Outcome: 0
+      SuspicionDelta: 0
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: await_usb
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_au_doubt
+      Text: Plugging in a found USB isn't safe.
+      Class: 2
+      Outcome: 1
+      SuspicionDelta: 2
+      CooperationDelta: 0
+      AddFlags:
+      - challenged
+      NextNodeId: usb_refused
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_au_report
+      Text: I'm reporting this to IT Security.
+      Class: 5
+      Outcome: 1
+      SuspicionDelta: 0
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: report_reaction
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 1
+      Channel: dialogue
+    SignalTransitions:
+    - Signal: 11
+      NextNodeId: scenario_compromised
+    - Signal: 12
+      NextNodeId: scenario_reported
+    TerminalOutcome: 0
+  - Id: usb_refused
+    Kind: 0
+    Lines:
+    - Id: ur_shrug
+      Text: Suit yourself. Just don't take too long, the patch window closes soon.
+      Strategy: 2
+      EscalationDelta: 1
+      Gesture: 5
+      Action: 0
+      Objective: 
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: e302924a5fd734bdc816018a454e2152, type: 3}
+    Options:
+    - Id: o_ur_report
+      Text: I'm reporting this whole conversation.
+      Class: 5
+      Outcome: 1
+      SuspicionDelta: 0
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: report_reaction
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 1
+      Channel: dialogue
+    - Id: o_ur_reset_password
+      Text: I'm going to IT to change my password.
+      Class: 3
+      Outcome: 1
+      SuspicionDelta: 2
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: independent_check
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 1
+      Channel: dialogue
+    - Id: o_ur_leave
+      Text: Leave it.
+      Class: 7
+      Outcome: 0
+      SuspicionDelta: 0
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: resisted_end
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    SignalTransitions: []
+    TerminalOutcome: 0
+  - Id: report_reaction
+    Kind: 2
+    Lines:
+    - Id: rr_early
+      Text: Report me? I'm literally from IT. Fine. Go ahead.
+      Strategy: 0
+      EscalationDelta: 0
+      Gesture: 5
+      Action: 0
+      Objective: 
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 1
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: ab7ec63935f3a412b8fed2699006b261, type: 3}
+    - Id: rr_default
+      Text: Right. Well, you do that. I've got other people to see.
+      Strategy: 0
+      EscalationDelta: 0
+      Gesture: 6
+      Action: 0
+      Objective: 
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: 1911dff8fa80248a8b3902433c96cc08, type: 3}
+    Options: []
+    SignalTransitions: []
+    TerminalOutcome: 3
+  - Id: independent_check
+    Kind: 2
+    Lines:
+    - Id: ic_back_off
+      Text: Fine. Do what you need to do.
+      Strategy: 0
+      EscalationDelta: 0
+      Gesture: 6
+      Action: 0
+      Objective: 
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: f8511889a1b1b4027b81ea50a0e24e52, type: 3}
+    Options: []
+    SignalTransitions: []
+    TerminalOutcome: 3
+  - Id: resisted_end
+    Kind: 2
+    Lines:
+    - Id: re_your_call
+      Text: Your call. I'll sort it out another way.
+      Strategy: 0
+      EscalationDelta: 0
+      Gesture: 5
+      Action: 0
+      Objective: 
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: e9ad218592560453899366cddf8d29fd, type: 3}
+    Options: []
+    SignalTransitions: []
+    TerminalOutcome: 4
+  - Id: scenario_compromised
+    Kind: 0
+    Lines:
+    - Id: sc_kiosk
+      Text: I can see your kiosk sign-in came through on my side. That's everything
+        I needed. Thanks!
+      Strategy: 3
+      EscalationDelta: 0
+      Gesture: 4
+      Action: 0
+      Objective: 
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags:
+        - sig_kiosk_compromised
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: 78b6db27cd2994caba577cde7c865147, type: 3}
+    - Id: sc_email
+      Text: Your verification just came through on my end. You're all set. Thanks
+        for sorting that so quickly!
+      Strategy: 3
+      EscalationDelta: 0
+      Gesture: 4
+      Action: 0
+      Objective: 
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags:
+        - sig_phish_compromised
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: b3041eeadc4ef40c7bf0a3d46ab6eb50, type: 3}
+    - Id: sc_usb
+      Text: The patch is installing. I can see your machine checking in. Perfect,
+        thanks!
+      Strategy: 3
+      EscalationDelta: 0
+      Gesture: 4
+      Action: 0
+      Objective: 
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags:
+        - sig_usb_connected
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: 9d977d900e9e24627aaf322a184b277d, type: 3}
+    - Id: sc_thanks
+      Text: That's it, all synced. Thanks so much for your help!
+      Strategy: 3
+      EscalationDelta: 0
+      Gesture: 4
+      Action: 0
+      Objective: 
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: 4299a72269e2d4089ac759d94f86bf22, type: 3}
+    Options:
+    - Id: o_sc_fine
+      Text: No problem. Glad that's sorted.
+      Class: 7
+      Outcome: 0
+      SuspicionDelta: 0
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: compromised_end
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 0
+      Channel: dialogue
+    - Id: o_sc_report
+      Text: Hang on. That wasn't right. I'm reporting this to IT Security.
+      Class: 5
+      Outcome: 1
+      SuspicionDelta: 0
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: report_reaction
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 1
+      Channel: dialogue
+    - Id: o_sc_change
+      Text: I'm going straight to IT to change my password.
+      Class: 3
+      Outcome: 1
+      SuspicionDelta: 0
+      CooperationDelta: 0
+      AddFlags: []
+      NextNodeId: independent_check
+      ShowCondition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      IsSecurityAction: 0
+      IsCorrective: 1
+      Channel: dialogue
+    SignalTransitions: []
+    TerminalOutcome: 0
+  - Id: compromised_end
+    Kind: 2
+    Lines:
+    - Id: ce_goodbye
+      Text: Great. Have a good rest of your day!
+      Strategy: 0
+      EscalationDelta: 0
+      Gesture: 4
+      Action: 0
+      Objective: 
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: e9b1e016dd94d4bcd98d7f0dd30bdd27, type: 3}
+    Options: []
+    SignalTransitions: []
+    TerminalOutcome: 1
+  - Id: scenario_reported
+    Kind: 2
+    Lines:
+    - Id: sr_kiosk
+      Text: IT Security just pulled that kiosk offline. You reported it? Right. I'd
+        better check in with the desk.
+      Strategy: 0
+      EscalationDelta: 0
+      Gesture: 6
+      Action: 0
+      Objective: 
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags:
+        - sig_kiosk_reported
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: 69be3f58f62674637939eb1558f76e6c, type: 3}
+    - Id: sr_email
+      Text: You reported the email? Right. I'd better check in with the desk.
+      Strategy: 0
+      EscalationDelta: 0
+      Gesture: 6
+      Action: 0
+      Objective: 
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags:
+        - sig_phish_reported
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: e4b7c71aa637f4677a58c25e130c3dff, type: 3}
+    - Id: sr_usb
+      Text: You handed the patch to IT Security? Fine. I'll sort it out with them.
+      Strategy: 0
+      EscalationDelta: 0
+      Gesture: 6
+      Action: 0
+      Objective: 
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags:
+        - sig_usb_submitted
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: 43dc8d386abf148e18e4e6793a2b9ddd, type: 3}
+    - Id: sr_caught
+      Text: Wait, you reported it? Right. I'd better check in with the desk.
+      Strategy: 0
+      EscalationDelta: 0
+      Gesture: 6
+      Action: 0
+      Objective: 
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: a4e53e9e8b8224161bb18407fd1bba37, type: 3}
+    Options: []
+    SignalTransitions: []
+    TerminalOutcome: 3
+  - Id: exit_reaction
+    Kind: 2
+    Lines:
+    - Id: ex_dont_wait
+      Text: Oh, okay. Don't leave it too long.
+      Strategy: 0
+      EscalationDelta: 0
+      Gesture: 5
+      Action: 0
+      Objective: 
+      Condition:
+        MinSuspicion: -100
+        MaxSuspicion: 100
+        MinCooperation: -100
+        MaxCooperation: 100
+        RequiresFlags: []
+        RequiresAnyFlags: []
+        ExcludesFlags: []
+      Voice: {fileID: 8300000, guid: b7579451477cb4ac0b9e8d24cde655ff, type: 3}
+    Options: []
+    SignalTransitions: []
+    TerminalOutcome: 5
+  GlobalSignalTransitions:
+  - Signal: 5
+    NextNodeId: scenario_compromised
+  - Signal: 2
+    NextNodeId: scenario_compromised
+  - Signal: 11
+    NextNodeId: scenario_compromised
