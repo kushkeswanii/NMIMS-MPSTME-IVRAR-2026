@@ -16,3 +16,4 @@
 *.unitypackage filter=lfs diff=lfs merge=lfs -text
 Group_09_Kush_Himanshi_Nirvan_Jiah/videos/*.mp4 filter=lfs diff=lfs merge=lfs -text
 Group_09_Kush_Himanshi_Nirvan_Jiah/videos/*.mov filter=lfs diff=lfs merge=lfs -text
+Group_09_Kush_Himanshi_Nirvan_Jiah/builds/*.apk filter=lfs diff=lfs merge=lfs -text
